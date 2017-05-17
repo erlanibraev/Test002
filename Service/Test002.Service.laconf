@@ -1,0 +1,33 @@
+﻿application
+{
+	disk-root=$"d:\tmp\nfx\"
+
+	glue
+	{
+		bindings 
+		{
+			binding
+			{
+				name="sync"
+                type="NFX.Glue.Native.SyncBinding, NFX"
+                server-transport
+                {
+                    rcv-buf-size=131072
+                    snd-buf-size=131072
+                    rcv-timeout=15000
+                    snd-timeout=15000
+                }
+			}
+		}
+		servers
+		{
+			server
+			{
+				node="sync://localhost:9090"
+				contract-servers=$"
+					Test002.Service.Servicies.TestMessageService, Test002.Service
+				"
+			}
+		}
+	}
+}
