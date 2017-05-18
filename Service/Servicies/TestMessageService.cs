@@ -1,4 +1,7 @@
-﻿using System;
+﻿using NFX;
+using NFX.DataAccess.CRUD;
+using NFX.DataAccess.MySQL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,34 +13,35 @@ namespace Test002.Service.Servicies
 {
     public class TestMessageService : ITestMessage
     {
-        private List<TestMessage> messages;
-        
-        public TestMessageService()
+        public static MySQLDataStore DataStore
         {
-            messages = new List<TestMessage>();
+            get
+            {
+                return App.DataStore as MySQLDataStore;
+            }
         }
 
-        TestMessage ITestMessage.recive(string reciever)
+
+        public TestMessage Recive(string reciever)
         {
-            TestMessage result = null;
-            if (reciever != null)
+            var query = new Query("Data.Scripts.GetLastMessage", typeof(TestMessage))
             {
-                foreach (TestMessage message in messages)
-                {
-                    if (reciever == message.reciever)
-                    {
-                        result = message;
-                        messages.Remove(message);
-                        break;
-                    }
-                }
-            }
+                new Query.Param("reciever", reciever)
+            } ;
+            TestMessage result = DataStore.LoadOneRow(query) as TestMessage;
             return result;
         }
 
-        void ITestMessage.send(TestMessage message)
+        public void Send(TestMessage message)
         {
-            messages.Add(message);
+            if (message != null)
+            {
+                if(message.dob == null)
+                {
+                    message.dob = DateTime.Now;
+                }
+                DataStore.Upsert(message);
+            }
         }
     }
 }

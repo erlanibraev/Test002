@@ -23,8 +23,8 @@ namespace Test002
                     message.reciever = "Bob";
                     message.message = "TEST!!!";
                     message.dob = DateTime.Now;
-                    service.send(message);
-                    TestMessage recive = service.recive("Bob");
+                    service.Send(message);
+                    TestMessage recive = service.Recive("Bob");
                     Console.WriteLine(recive.message);
                 }
             }

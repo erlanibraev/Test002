@@ -1,0 +1,1 @@
+﻿select * from tbl_testmessage where reciever = ?reciever order by dob limit 1;

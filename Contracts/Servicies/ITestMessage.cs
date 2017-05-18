@@ -10,7 +10,7 @@ namespace Test002.Contracts.Servicies
     [Glued]
     public interface ITestMessage
     {
-        void send(TestMessage message);
-        TestMessage recive(string reciever);
+        void Send(TestMessage message);
+        TestMessage Recive(string reciever);
     }
 }
