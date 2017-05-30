@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{984569E8-C3C4-4D2E-83C8-A2B2B5D7190F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Test002.Contracts</RootNamespace>
-    <AssemblyName>Test002.Contracts</AssemblyName>
+    <ProjectGuid>{C5967B1A-9AD9-416C-AA44-4748CB5A9EFF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ClientAlice</RootNamespace>
+    <AssemblyName>ClientAlice</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -30,9 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -67,23 +64,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GluedClients\TestMessageAutoClient.cs" />
+    <Compile Include="MessageReader.cs" />
+    <Compile Include="MessageReciever.cs" />
+    <Compile Include="MessageSender.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\TestMessage.cs" />
-    <Compile Include="Servicies\ITestMessage.cs" />
+    <Compile Include="RandomTextMessageSender.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Data\Schema\database-schema.rschema" />
+    <None Include="ClientAlice.laconf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Schema\db.auto.tables.MySQL.sql" />
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{984569e8-c3c4-4d2e-83c8-a2b2b5d7190f}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)packages\NFX.3.4.0.1\tools\gluec" "$(SolutionDir)Contracts\$(OutDir)Test002.Contracts.dll" /o out="$(SolutionDir)ClientAlice\GluedClients" cl-suffix="AutoClient"
-
-"$(SolutionDir)packages\NFX.3.4.0.1\tools\gluec" "$(SolutionDir)Contracts\$(OutDir)Test002.Contracts.dll" /o out="$(SolutionDir)Test002\GluedClients" cl-suffix="AutoClient"
-
-"$(SolutionDir)packages\NFX.3.4.0.1\tools\rsc" "$(ProjectDir)Data\Schema\database-schema.rschema" /o out-name-prefix=db.auto.</PostBuildEvent>
-  </PropertyGroup>
 </Project>

@@ -18,13 +18,11 @@ namespace Test002
             {
                 using (var service = new TestMessageAutoClient(App.ConfigRoot.AttrByName("test-service-node").Value))
                 {
-                    TestMessage message = new TestMessage();
-                    message.sender = "Alice";
-                    message.reciever = "Bob";
-                    message.message = "TEST!!!";
-                    message.dob = DateTime.Now;
+                    TestMessage message = new TestMessage() { ID="", sender ="Alice", reciever="Bob", message="TEST!!!", dob = DateTime.Now};
                     service.Send(message);
                     TestMessage recive = service.Recive("Bob");
+                    Console.Write(recive.dob);
+                    Console.Write(" --- ");
                     Console.WriteLine(recive.message);
                 }
             }

@@ -8,7 +8,7 @@
         connect-string="Server=localhost;Database=contacts;Uid=root;Pwd=crazy"
         script-assembly="Test002.Service"
     }
-
+	
 	glue
 	{
 		bindings 
@@ -37,4 +37,5 @@
 			}
 		}
 	}
+	
 }

@@ -29,6 +29,16 @@ namespace Test002.Service.Servicies
                 new Query.Param("reciever", reciever)
             } ;
             TestMessage result = DataStore.LoadOneRow(query) as TestMessage;
+            if (result != null)
+            {
+                result.readed = "true";
+                DataStore.Upsert(result);
+                Console.WriteLine("recieved - " + result.ToString());
+
+            } else
+            {
+                Console.WriteLine("Not readed message for "+reciever+" not found!" );
+            }
             return result;
         }
 
@@ -38,9 +48,12 @@ namespace Test002.Service.Servicies
             {
                 if(message.dob == null)
                 {
+                    message.ID = Guid.NewGuid().ToString("N");
+                    message.readed = "false";
                     message.dob = DateTime.Now;
                 }
                 DataStore.Upsert(message);
+                Console.WriteLine("sended - " + message.ToString());
             }
         }
     }

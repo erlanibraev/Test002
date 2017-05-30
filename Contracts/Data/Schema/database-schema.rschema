@@ -1,0 +1,20 @@
+﻿schema
+{
+    TID="TVarchar(32)"
+    TName="TVarchar(32)"
+	TText="TVarchar(1000)"
+
+    table=testmessage
+    {
+        comment="testmessage"
+
+        column=ID { type=$(/$TID) required=true comment="ID" }
+        column=message { type=$(/$TText) required=true comment="message" }
+        column=sender { type=$(/$TName) required=false comment="sender" }
+        column=reciever { type=$(/$TName) required=true comment="reciever" }
+        column=dob { type=TDateTime required=false comment="date send" }
+        column=readed { type=TVarchar(5) required=true comment="readed|not readed" }
+
+        primary-key { column=ID{} }
+    }
+}
